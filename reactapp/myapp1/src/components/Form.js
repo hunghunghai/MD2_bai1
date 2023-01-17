@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 
-export class Form extends PureComponent {
+class Form extends Component {
   render() {
     return (
         <div className="col-5 grid-margin">
@@ -69,4 +69,4 @@ export class Form extends PureComponent {
   }
 }
 
-export default Form
+export default Form;

@@ -1,6 +1,28 @@
 import React, { Component } from 'react'
 
-export default class Control extends Component {
+class Control extends Component {
+    constructor(props) {
+        super();
+        this.state = {
+            searchData: ''
+        }
+    }
+    handleSearch = (e) => {
+        e.preventDefault();
+        //Lấy dữ liệu nhập vào ô search
+        // B3. Gọi props từ App truyền sang
+        this.props.handleSearchProps(this.state.searchData);
+    }
+    handleChange = (e) => {
+        this.setState({
+            searchData: e.target.value
+        })
+    }
+    handleSort = (e) => {
+        let sortData = e.target.value;
+        let arrSort = sortData.split('-');
+        this.props.handleSort(arrSort[0], arrSort[1]);
+    }
     render() {
         return (
             <div className="card-header">
@@ -18,22 +40,27 @@ export default class Control extends Component {
                                 className="form-control"
                                 placeholder="Search Here"
                                 title="Search here"
+                                name="search"
+                                id="search"
+                                onChange={this.handleChange}
                             />
-                            <button className="btn btn-primary btn-icon-text">
+                            <button className="btn btn-primary btn-icon-text" onClick={this.handleSearch}>
                                 Tìm kiếm
                             </button>
                         </form>
                     </div>
                     <div className="col-3 d-flex align-items-center">
-                        <select className="form-control">
-                            <option value="">Sắp xếp</option>
-                            <option value="">ABC def</option>
-                            <option value="">ABC def</option>
-                            <option value="">ABC def</option>
+                        <select className="form-control" onChange={this.handleSort}>
+                            <option value="">Chọn sắp xếp</option>
+                            <option value="studentName-ASC">Tên tăng dần</option>
+                            <option value="studentName-DESC">Tên giảm dần</option>
+                            <option value="age-ASC">Tuổi tăng dần</option>
+                            <option value="age-DESC">Tuổi giảm dần</option>
                         </select>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
+export default Control;
